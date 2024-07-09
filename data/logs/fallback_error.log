@@ -1,0 +1,12 @@
+2024/07/09 14:41:43 [alert] 178#178: 512 worker_connections are not enough
+2024/07/09 14:41:43 [error] 177#177: *676 recv() failed (104: Connection reset by peer) while reading response header from upstream, client: 127.0.0.1, server: localhost-nginx-proxy-manager, request: "GET /favicon.ico HTTP/1.1", upstream: "http://127.0.0.1:80/favicon.ico", host: "localhost", referrer: "http://localhost/"
+2024/07/09 16:42:51 [warn] 198#198: 512 worker_connections are not enough, reusing connections
+2024/07/09 16:42:51 [alert] 198#198: 512 worker_connections are not enough
+2024/07/09 16:42:51 [error] 198#198: *1811 recv() failed (104: Connection reset by peer) while reading response header from upstream, client: 127.0.0.1, server: localhost-nginx-proxy-manager, request: "GET /favicon.ico HTTP/1.1", upstream: "http://127.0.0.1:80/favicon.ico", host: "db.localhost", referrer: "http://db.localhost/"
+2024/07/09 17:55:57 [error] 171#171: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.18.0.1, server: nginxproxymanager, request: "GET /api/ HTTP/1.1", upstream: "http://127.0.0.1:3000/", host: "localhost:81", referrer: "http://localhost:81/nginx/proxy"
+2024/07/09 17:56:10 [error] 171#171: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.18.0.1, server: nginxproxymanager, request: "GET /api/ HTTP/1.1", upstream: "http://127.0.0.1:3000/", host: "localhost:81", referrer: "http://localhost:81/"
+2024/07/09 17:56:27 [error] 171#171: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.18.0.1, server: nginxproxymanager, request: "GET /api/ HTTP/1.1", upstream: "http://127.0.0.1:3000/", host: "localhost:81", referrer: "http://localhost:81/nginx/proxy"
+2024/07/09 17:56:40 [error] 171#171: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.18.0.1, server: nginxproxymanager, request: "GET /api/ HTTP/1.1", upstream: "http://127.0.0.1:3000/", host: "localhost:81", referrer: "http://localhost:81/"
+2024/07/09 21:14:35 [alert] 149#149: worker process 172 exited on signal 9
+2024/07/09 21:14:35 [alert] 149#149: worker process 171 exited on signal 9
+2024/07/09 21:14:35 [alert] 149#149: cache manager process 173 exited on signal 9

@@ -1,0 +1,4 @@
+[09/Jul/2024:14:14:49 +0000] 200 - GET http localhost "/" [Client 172.18.0.1] [Length 1033] [Gzip -] "curl/7.81.0" "-"
+[09/Jul/2024:14:41:41 +0000] 200 - GET http localhost "/" [Client 172.18.0.1] [Length 568] [Gzip 1.86] "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:127.0) Gecko/20100101 Firefox/127.0" "-"
+[09/Jul/2024:16:42:47 +0000] 200 - GET http db.localhost "/" [Client 172.18.0.1] [Length 568] [Gzip 1.86] "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:127.0) Gecko/20100101 Firefox/127.0" "-"
+[09/Jul/2024:16:43:45 +0000] 200 - GET http db.localhost "/" [Client 172.18.0.1] [Length 568] [Gzip 1.86] "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:127.0) Gecko/20100101 Firefox/127.0" "-"
