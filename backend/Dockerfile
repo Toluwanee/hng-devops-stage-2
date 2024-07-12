@@ -1,88 +1,45 @@
-# Base image with Python
+# Use the official Ubuntu image
+FROM ubuntu:22.04
 
-FROM python:3.10-slim
-
-
-
-# Create working directory
-
+# Set the working directory in the container
 WORKDIR /app
 
+# Install dependencies and Python 3
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends \
+    python3 \
+    python3-pip \
+    curl \
+    bash \
+    && rm -rf /var/lib/apt/lists/*
 
+# Install Poetry
+RUN curl -sSL https://install.python-poetry.org | python3 -
 
-# Copy poetry.lock and pyproject.toml
+# Add Poetry to the PATH
+ENV PATH="/root/.local/bin:$PATH"
 
-COPY poetry.lock ./
+# Copy the rest of the application code into the container
+COPY . /app
 
-COPY pyproject.toml ./
-
-
-
-# Install dependencies using Poetry (assuming Poetry is not pre-installed)
-
-#RUN apt-get update && apt-get install -y --no-install-recommends \
-
-#    curl  # needed for installing Poetry
-
-
-
-#RUN curl -sSL https://install.python-poetry.org | python3 -  # Install Poetry
-
-RUN pip install poetry
-
-
-
-ENV PATH="$PATH:/opt/poetry/bin"
-
-
-
-# Copy application code
-
-COPY . .
-
-
-
+# Install the dependencies using Poetry
 RUN poetry install
 
+# Make sure the prestart script is executable
+RUN chmod +x ./prestart.sh
 
+RUN tr -d '\r' < prestart.sh > prestart_fixed.sh \
+    && mv prestart_fixed.sh prestart.sh
+    
+# Set environment variables
+ENV PYTHONPATH=/app
 
-# Expose port for FastAPI (typically 8000)
-
+# Expose the port the app runs on
 EXPOSE 8000
 
+# Print Python and Poetry version for debugging
+RUN python3 --version && poetry --version
 
-
-# Postgres
-
-# Environment variables for database connection
-
-ENV POSTGRES_SERVER=localhost
-
-ENV POSTGRES_PORT=5432
-
-ENV POSTGRES_DB=app
-
-ENV POSTGRES_USER=app
-
-ENV POSTGRES_PASSWORD=hngapptolu
-
-
-
-# Set working directory within the container (optional)
-
-WORKDIR /app
-
-
-
-# Database setup using Poetry script
-
-#RUN poetry run bash ./prestart.sh
-
-
-
-# Entrypoint command
-
-#CMD poetry run bash ./prestart.sh; poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000
-
-CMD ["sh", "-c", "poetry run bash ./prestart.sh && poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"]
+# Run the prestart script and then start the Uvicorn server
+CMD ["bash", "-c", "poetry run bash ./prestart.sh && poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000"]
 

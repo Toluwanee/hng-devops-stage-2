@@ -11,15 +11,23 @@ services:
       - db
     env_file:
       - ./backend/.env
+    environment:
+      PYTHONPATH: /app
+    networks:
+      - mynetwork
 
   frontend:
     build:
       context: ./frontend
     container_name: react_app
     ports:
-      - "5173:5173"
+      - "3000:80"
     env_file:
       - ./frontend/.env
+#    environment:
+#      - VITE_API_URL=http://localhost:8000
+    networks:
+      - mynetwork
 
   db:
     image: postgres:latest
@@ -28,14 +36,20 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    env_file:
-      - ./backend/.env
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: hngapptolu
+    networks:
+      - mynetwork
 
   adminer:
     image: adminer
     container_name: adminer
     ports:
       - "8080:8080"
+    networks:
+      - mynetwork
 
   proxy:
     image: jc21/nginx-proxy-manager:latest
@@ -54,8 +68,15 @@ services:
       - backend
       - frontend
       - adminer
+#    networks:
+#      - mynetwork
 
 volumes:
   postgres_data:
   data:
   letsencrypt:
+
+networks:
+  mynetwork:
+   driver: bridge
+  
